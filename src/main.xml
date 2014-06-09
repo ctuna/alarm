@@ -5,27 +5,31 @@
 <!-- ASSETS -->
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-<skin id="charcoalSkin" color="#EBF0FA"/>
+<skin id="charcoalSkin" color="#344040"/>
 <skin id = "buttonSkin" color = "#142952" />
-<skin id = "cancelButtonSkin" color = "#F4D4CA" />
-<skin id = "saveButtonSkin" color = "#C2F0C2" />
-<skin id = "numberButtonSkin" color = "#142952" />
-<skin id = "numberPressedSkin" color = "#5C85D6" />
+<skin id = "cancelButtonSkin" color = "#990000" />
+<skin id = "cancelButtonPressedSkin" color = "#FF3333" />
+<skin id = "saveButtonSkin" color = "#005C1F" />
+<skin id = "saveButtonPressedSkin" color = "#33AD5C" />
+<skin id = "numberButtonSkin" color = "#111A1A" />
+<skin id = "numberPressedSkin" color = "#8E9595" />
 
-<texture id="clockTexture" small="./assets/alarm-small-icon.png"/>
-	<skin id=" clockSkin" texture="clockTexture" x="0" y="0" width="50" height="50">
-		<variants offset="50"/>
+<texture id="clockTexture" small="./assets/alarm-icon.png"/>
+	<skin id=" clockSkin" texture="clockTexture" x="0" y="0" width="200" height="200">
+		<variants offset="200"/>
 	</skin>
 
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <!-- STYLES -->
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-<style id="timeStyle" font="bold 80px Helvetica, sans-serif" color="#47475E" align="center, middle"/>
-<style id="alarmTimeStyle" font="bold 30px Helvetica, sans-serif" color="#47475E" align="center, middle"/>
-<style id="buttonStyle" font="bold 30px Helvetica, sans-serif" color="white" align="center, middle"/>
-<style id="alarmSetForStyle" font="bold 20px Helvetica, sans-serif" color="#47475E" align = "center, middle"/>
-
+<style id="timeStyle" font="bold 80px Helvetica, sans-serif" color="white" align="center, middle"/>
+<style id="alarmTimeStyle" font="bold 30px Helvetica, sans-serif" color="white" align="center, middle"/>
+<style id="buttonStyle" font="bold 40px Helvetica, sans-serif" color="white" align="center, middle"/>
+<style id="numberStyle" font="bold 20px Helvetica, sans-serif" color="white" align="center, middle"/>
+<style id="alarmSetForStyle" font="bold 20px Helvetica, sans-serif" color="white" align = "center, middle"/>
+<style id="clrStyle" font="bold 15px Helvetica, sans-serif" color="white" align = "center, middle"/>
+<style id="cornerTimeStyle" font="bold 20px Helvetica, sans-serif" color="white" align = "right, top"/>
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <!-- HANDLERS -->
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -80,6 +84,8 @@
 					if (currentTime == getTimeOfAlarm()){
 						trace("ALARM GOING OFF");
 						isRinging = true;
+						changeScreen(ALARMSCREEN);
+						 
 					}	
 					
 				]]></method>		
@@ -87,7 +93,7 @@
       	</label>		      		
 
 		</column>		
-		<container left="0" right="0" bottom="0"  skin="buttonSkin" active="true">
+		<container left="0" right="0" bottom="0"  skin="numberButtonSkin" active="true">
 			<label left="0" right="0" top="0"  style="buttonStyle" string = "'set alarm'"/>
 				<behavior>
 					<method id="onTouchBegan" params="content, id, x, y, ticks">
@@ -122,109 +128,170 @@
             
 	</container>
 	<container id = "SetAlarmScreen" left="10" right="10" top="10" bottom="10">
-		<label left="0" right="0" top="0" height = "30"  style="alarmTimeStyle">
-			<behavior>
-				<method id="onCreate" params="content">
+
+
+		<line top = "0" bottom = "0" left = "0" right = "0">
+		<column top = "0" left = "0" bottom = "0">
+			<label left="0" right="0" top="0" height = "30"  style="alarmTimeStyle">
+				<behavior>
+					<method id="onCreate" params="content">
                     <![CDATA[
                         content.string = alarmTime;
                     ]]>
-                </method>
-			</behavior>
-		</label>ß
-
-		<container left="0" right="0" bottom="30"  skin="saveButtonSkin" active="true">
-			<label left="0" right="0" top="0"  style="buttonStyle" string = "'save'"/>
-				<behavior>
-					<method id="onTouchEnded" params="content, id, x, y, ticks">
-                        <![CDATA[
-                            changeScreen(SHOWTIMESCREEN);
-                        ]]>
-                    </method>
+                	</method>
 				</behavior>
-		</container>
-		<column>
+			</label>
 			<line top="15" left="0" bottom="0" right="0">
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="1" style = "buttonStyle"/>
+                        string="1" style = "numberStyle"/>
                 </container>
                 <content width ="6"/>
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="2" style = "buttonStyle"/>
+                        string="2" style = "numberStyle"/>
                 </container>
                 <content width ="6"/>
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="3" style = "buttonStyle"/>
+                        string="3" style = "numberStyle"/>
                 </container>
             </line>
             <content height = "6"/>
             			<line top="0" left="0" bottom="0" right="0">
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="4" style = "buttonStyle"/>
+                        string="4" style = "numberStyle"/>
                 </container>
                 <content width ="6"/>
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="5" style = "buttonStyle"/>
+                        string="5" style = "numberStyle"/>
                 </container>
                 <content width ="6"/>
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="6" style = "buttonStyle"/>
+                        string="6" style = "numberStyle"/>
                 </container>
             </line>
             <content height = "6"/>
             			<line top="0" left="0" bottom="0" right="0">
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="7" style = "buttonStyle"/>
+                        string="7" style = "numberStyle"/>
                 </container>
                 <content width ="6"/>
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="8" style = "buttonStyle"/>
+                        string="8" style = "numberStyle"/>
                 </container>
                 <content width ="6"/>
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="9" style = "buttonStyle"/>
+                        string="9" style = "numberStyle"/>
                 </container>
             </line>
             <content height = "6"/>
             	<line top="0" left="0" bottom="0" right="0">
 				<container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="'clr'" style = "buttonStyle"/>
+                        string="'clr'" style = "clrStyle"/>
                 </container>
                 <content width = "6"/>
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="'0'" style = "buttonStyle"/>
+                        string="'0'" style ="numberStyle"/>
                 </container>
                 <content width = "6"/>
                 <container like="NumberContainer">
                 	<label top="10" left="10" bottom="10" right="10"
-                        string="'-'" style = "buttonStyle"/>
+                        string="'-'" style = "numberStyle"/>
                 </container>
       	</line>
         </column>
         
-        
-		<container left="0" right="0" bottom="0"  skin="cancelButtonSkin" active="true">
+        <column top = "0" right = "0" bottom = "0" left = "20">
+		<container left="0" right="0" bottom="0" skin="cancelButtonSkin" active="true">
 			<label left="0" right="0" top="0"  style="buttonStyle" string = "'cancel'"/>
 				<behavior>
-					<method id="onTouchEnded" params="content, id, x, y, ticks">
-                        <![CDATA[
-                            changeScreen(SHOWTIMESCREEN);
-                        ]]>
-                    </method>
+					<method id="onTouchBegan" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                content.skin= cancelButtonPressedSkin;
+                            ]]>
+           		 	</method>
+           		 	<method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                               content.skin= cancelButtonSkin;
+                               changeScreen(SHOWTIMESCREEN);
+                            ]]>
+            		</method>
+				</behavior>
+
+		</container>
+		<content height = "6"/>
+		<container left="0" right="0" bottom="30"  skin="saveButtonSkin" active="true">
+			<label left="0" right="0" top="0"  style="buttonStyle" string = "'save'"/>
+				<behavior>
+					<method id="onTouchBegan" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                content.skin= saveButtonPressedSkin;
+                            ]]>
+           		 	</method>
+           		 	<method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                               content.skin= saveButtonSkin;
+                               changeScreen(SHOWTIMESCREEN);
+                            ]]>
+            		</method>
 				</behavior>
 		</container>
+		
+		</column> 
+		</line> 
 	</container> 
     
+    
+    <container id = "DetonateAlarmScreen" left="10" right="10" top="10" bottom="10" active = "true" skin = "charcoalSkin" >
+    	<column left="0" right="0" top="0" bottom="0">
+    	<label left="0" right="0" top="0" bottom="0" style = "cornerTimeStyle">
+    		<behavior>
+    			<method id="onCreate" params="content">
+                    <![CDATA[
+                        content.interval = 1000;
+                        content.string = getCurrentTime();
+                        content.start();
+                    ]]>
+                </method>
+                <method id="onTimeChanged" params="content">
+                    <![CDATA[
+                        content.string = getCurrentTime();
+                    ]]>
+                </method>
+        	</behavior> 
+        </label>
+    	<content height = "6"/>
+    	<container left="0" top = "0" bottom = "0"  right="0" skin="clockSkin" variant="0">
+					<behavior>
+						<method id="onDisplaying" params="container"><![CDATA[
+							container.interval = 100;
+							container.start();
+						]]></method>	
+						<method id="onTimeChanged" params="container"><![CDATA[
+							container.variant = (container.variant + 1) % 4;
+						]]></method>	
+					</behavior>
+					
+				</container>
+    	</column> 
+    	<behavior>
+            <method id="onTouchEnded" params="content, id, x, y, ticks">
+                <![CDATA[
+                	isRinging = false; 
+                    changeScreen(SHOWTIMESCREEN); 
+                ]]>
+            </method>
+        </behavior>
+    </container>
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <!-- SCRIPTS -->
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -250,7 +317,7 @@
             
             function getCurrentTime(){
             	var date=new Date();
-    			var hours=date.getHours()%13;
+    			var hours=date.getHours()%12;
     			var minutes=date.getMinutes();
 				if (hours   < 10) {hours   = "0"+hours;}
 				if (minutes < 10) {minutes = "0"+minutes;}
@@ -266,6 +333,10 @@
 				else if (nextScreen == SHOWTIMESCREEN){
 					currentScreen = new ShowTimeScreen();
 				}
+				else if (nextScreen == ALARMSCREEN){
+					currentScreen = new DetonateAlarmScreen();
+				}
+				
 				mainContainer.add(currentScreen);
 			}
 			
@@ -285,7 +356,7 @@
 					currentNum = currentNum + numPressed;
 				}
 				alarmTime = toTime(currentNum);
-				currentScreen.first.string = alarmTime;
+				currentScreen.first.first.first.string = alarmTime;
 				trace ("alarm time is: " + alarmTime + "\n");
 			}
 			
