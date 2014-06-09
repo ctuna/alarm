@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<program xmlns="http://www.kinoma.com/kpr/1">
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- ASSETS -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<skin id="charcoalSkin" color="#485151"/>
+<skin id = "buttonSkin" color = "#D6EBFF" />
+<skin id = "cancelButtonSkin" color = "#F4D4CA" />
+<skin id = "saveButtonSkin" color = "#C2F0C2" />
+<skin id = "numberButtonSkin" color = "#C4D0DB" />
+<skin id = "PressedSkin" color = "#DFDFDF" />
+
+<texture id="clockTexture" small="./assets/alarm-small-icon.png"/>
+	<skin id=" clockSkin" texture="clockTexture" x="0" y="0" width="50" height="50">
+		<variants offset="50"/>
+	</skin>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- STYLES -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<style id="timeStyle" font="bold 80px Helvetica, sans-serif" color="white" align="center, middle"/>
+<style id="buttonStyle" font="bold 30px Helvetica, sans-serif" color="#5C5C5C" align="center, middle"/>
+<style id="alarmSetForStyle" font="bold 20px Helvetica, sans-serif" color="white" align = "center, middle"/>
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- HANDLERS -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- LAYOUTS -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<container id="MainContainer" left="0" right="0" top="0" bottom="0" skin="charcoalSkin" active="true">
+
+	</container>
+	
+	<container id = "ShowTimeScreen" left="10" right="10" top="10" bottom="10" >
+			<column top="0" bottom="0" left = "0" right = "0">
+			<line top="0" right = "0" left = "0">
+				<label style = "alarmSetForStyle">
+      				<behavior>
+						<method id="onCreate" params="content">
+                            <![CDATA[
+                                content.string = "alarm set for"; 
+                            ]]>
+                        </method>	
+					</behavior>
+				</label>
+      			<content width="20"/>
+      			<label style = "alarmSetForStyle">
+      				<behavior>
+						<method id="onCreate" params="content">
+                            <![CDATA[
+                                content.string = getTimeOfAlarm();
+                            ]]>
+                        </method>	
+					</behavior>
+				</label>
+			</line>
+			
+			
+		<label left="0" right="0" top="0"  style="timeStyle">
+			<behavior>
+				<method id="onCreate" params="content">
+                            <![CDATA[
+					content.interval = 1000;
+					var currentTime = getCurrentTime();
+					content.string = currentTime;
+			
+					content.start();
+                            ]]>
+				</method>
+				<method id="onTimeChanged" params="content"><![CDATA[
+					var currentTime = getCurrentTime();
+					content.string = currentTime;
+					if (currentTime == getTimeOfAlarm()){
+						isRinging = true;
+					}	
+					
+				]]></method>		
+			</behavior>
+      	</label>		      		
+
+		</column>		
+		<container left="0" right="0" bottom="0"  skin="buttonSkin" active="true">
+			<label left="0" right="0" top="0"  style="buttonStyle" string = "'set alarm'"/>
+				<behavior>
+					<method id="onTouchEnded" params="content, id, x, y, ticks">
+                        <![CDATA[
+                            changeScreen(SETALARMSCREEN);
+                        ]]>
+                    </method>
+				</behavior>
+		</container>
+	</container>
+	
+	<container id="NumberContainer" width="40" height="40" skin="numberButtonSkin"  active="true"/>
+	<container id = "SetAlarmScreen" left="10" right="10" top="10" bottom="10">
+		<label left="0" right="0" top="0" height = "30"  style="buttonStyle" string = "'01:50'"/>
+		<container left="0" right="0" bottom="30"  skin="saveButtonSkin" active="true">
+			<label left="0" right="0" top="0"  style="buttonStyle" string = "'save'"/>
+				<behavior>
+					<method id="onTouchEnded" params="content, id, x, y, ticks">
+                        <![CDATA[
+                            changeScreen(SHOWTIMESCREEN);
+                        ]]>
+                    </method>
+				</behavior>
+		</container>
+		<column>
+			<line top="0" left="0" bottom="0" right="0">
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="1" style = "buttonStyle"/>
+                	<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(1);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+                <content width ="6"/>
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="2" style = "buttonStyle"/>
+					<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(2);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+                <content width ="6"/>
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="3" style = "buttonStyle"/>
+					<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(3);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+            </line>
+            <content height = "6"/>
+            			<line top="0" left="0" bottom="0" right="0">
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="4" style = "buttonStyle"/>
+                	<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(4);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+                <content width ="6"/>
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="5" style = "buttonStyle"/>
+					<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(5);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+                <content width ="6"/>
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="6" style = "buttonStyle"/>
+					<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(6);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+            </line>
+            <content height = "6"/>
+            			<line top="0" left="0" bottom="0" right="0">
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="7" style = "buttonStyle"/>
+                	<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(7);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+                <content width ="6"/>
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="8" style = "buttonStyle"/>
+					<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(8);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+                <content width ="6"/>
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="9" style = "buttonStyle"/>
+					<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(9);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+            </line>
+            <content height = "6"/>
+            			<line top="0" left="0" bottom="0" right="0">
+                <container like="NumberContainer">
+                	<label top="10" left="10" bottom="10" right="10"
+                        string="0" style = "buttonStyle"/>
+                	<behavior>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
+                            <![CDATA[
+                                press(0);
+                            ]]>
+                        </method>
+                    </behavior>
+                </container>
+      	</line>
+        </column>
+        
+        
+		<container left="0" right="0" bottom="0"  skin="cancelButtonSkin" active="true">
+			<label left="0" right="0" top="0"  style="buttonStyle" string = "'cancel'"/>
+				<behavior>
+					<method id="onTouchEnded" params="content, id, x, y, ticks">
+                        <![CDATA[
+                            changeScreen(SHOWTIMESCREEN);
+                        ]]>
+                    </method>
+				</behavior>
+		</container>
+	</container> 
+    
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- SCRIPTS -->
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <script>
+        <![CDATA[
+        	var SHOWTIMESCREEN = 0;
+        	var SETALARMSCREEN = 1;
+        	var ALARMSCREEN = 2;
+        	var mainContainer = new MainContainer({});
+        	var currentScreen = new ShowTimeScreen();
+
+
+            application.add(mainContainer); 
+            mainContainer.add(currentScreen);
+            var isRinging = false; 
+            
+            
+            function getTimeOfAlarm(){
+            	return "06:19:30";
+            }
+            
+            
+            function getCurrentTime(){
+            	var date=new Date();
+    			var hours=date.getHours()%12;
+    			var minutes=date.getMinutes();
+				if (hours   < 10) {hours   = "0"+hours;}
+				if (minutes < 10) {minutes = "0"+minutes;}
+				var time    = hours+':'+minutes;
+				return time; 
+				}
+				
+			function changeScreen(nextScreen){
+				mainContainer.remove(currentScreen);
+				if (nextScreen == SETALARMSCREEN){
+					currentScreen = new SetAlarmScreen();
+				}
+				else if (nextScreen == SHOWTIMESCREEN){
+					currentScreen = new ShowTimeScreen();
+				}
+				
+				mainContainer.add(currentScreen);
+			}
+			function press(num){
+				trace ("pressed: " + num + '\n');
+			}
+        ]]>
+    </script>
+</program>
