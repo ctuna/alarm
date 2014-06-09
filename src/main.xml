@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <program xmlns="http://www.kinoma.com/kpr/1">
 
+	<require id="THEME" path="themes/flat/theme"/>
+	<require id="BUTTONS" path="controls/buttons"/>
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <!-- ASSETS -->
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -30,6 +32,15 @@
 <style id="alarmSetForStyle" font="bold 20px Helvetica, sans-serif" color="white" align = "center, middle"/>
 <style id="clrStyle" font="bold 15px Helvetica, sans-serif" color="white" align = "center, middle"/>
 <style id="cornerTimeStyle" font="bold 20px Helvetica, sans-serif" color="white" align = "right, top"/>
+
+
+<style id="labelStyle" font="bold 40px Helvetica, sans-serif" color="white" align="left, middle"/>
+
+
+<style id="checkboxStyle" font="bold 30px" align="left">
+		<states colors="white,gray,green"/>
+</style>
+
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 <!-- HANDLERS -->
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
@@ -44,30 +55,10 @@
 	
 	<container id = "ShowTimeScreen" left="10" right="10" top="10" bottom="10" >
 			<column top="0" bottom="0" left = "0" right = "0">
-			<line top="0" right = "0" left = "0">
-				<label style = "alarmSetForStyle">
-      				<behavior>
-						<method id="onCreate" params="content">
-                            <![CDATA[
-                                content.string = "alarm set for"; 
-                            ]]>
-                        </method>	
-					</behavior>
-				</label>
-      			<content width="20"/>
-      			<label style = "alarmSetForStyle">
-      				<behavior>
-						<method id="onCreate" params="content">
-                            <![CDATA[
-                                content.string = getTimeOfAlarm();
-                            ]]>
-                        </method>	
-					</behavior>
-				</label>
-			</line>
 			
 			
-		<label left="0" right="0" top="0"  style="timeStyle">
+			
+		<label left="0" right="0" top="40"  style="timeStyle">
 			<behavior>
 				<method id="onCreate" params="content">
                             <![CDATA[
@@ -81,8 +72,8 @@
 				<method id="onTimeChanged" params="content"><![CDATA[
 					var currentTime = getCurrentTime();
 					content.string = currentTime;
-					if (currentTime == getTimeOfAlarm()){
-						trace("ALARM GOING OFF");
+					if (currentTime == getTimeOfAlarm()&& alarmOn){
+						
 						isRinging = true;
 						changeScreen(ALARMSCREEN);
 						 
@@ -211,23 +202,34 @@
         </column>
         
         <column top = "0" right = "0" bottom = "0" left = "20">
-		<container left="0" right="0" bottom="0" skin="cancelButtonSkin" active="true">
-			<label left="0" right="0" top="0"  style="buttonStyle" string = "'cancel'"/>
-				<behavior>
-					<method id="onTouchBegan" params="content, id, x, y, ticks">
-                            <![CDATA[
-                                content.skin= cancelButtonPressedSkin;
-                            ]]>
-           		 	</method>
-           		 	<method id="onTouchEnded" params="content, id, x, y, ticks">
-                            <![CDATA[
-                               content.skin= cancelButtonSkin;
-                               changeScreen(SHOWTIMESCREEN);
-                            ]]>
-            		</method>
-				</behavior>
-
-		</container>
+        
+       
+	<line left = "0" right = "0" top = "0">
+		<container  left="0" top="0" width="30" height="30" like="BUTTONS.Checkbox">    	
+			<behavior like="BUTTONS.CheckboxBehavior">
+				<method id="onSelected"><![CDATA[
+					checkBoxLabel.string = "on";        
+					alarmOn = true;       
+				]]></method>
+				<method id="onUnselected"><![CDATA[
+					checkBoxLabel.string = "off";         
+					alarmOn = false;        
+				]]></method>
+			</behavior>
+		</container>   
+		<label top="0" left="0" bottom="0" right="0"
+            string="'off'" style = "labelStyle">
+            <behavior>
+            	<method id="onCreate" params="content">
+                    <![CDATA[
+                        checkBoxLabel = content; 
+                    ]]>
+                </method>
+            </behavior>
+        </label>
+     </line>
+			
+		
 		<content height = "6"/>
 		<container left="0" right="0" bottom="30"  skin="saveButtonSkin" active="true">
 			<label left="0" right="0" top="0"  style="buttonStyle" string = "'save'"/>
@@ -284,9 +286,16 @@
 				</container>
     	</column> 
     	<behavior>
+    		<method id="onTouchBegan" params="content, id, x, y, ticks">
+                <![CDATA[
+                    content.skin = numberPressedSkin;
+                ]]>
+            </method>
             <method id="onTouchEnded" params="content, id, x, y, ticks">
                 <![CDATA[
                 	isRinging = false; 
+                	alarmOn = false; 
+                	content.skin = charcoalSkin;
                     changeScreen(SHOWTIMESCREEN); 
                 ]]>
             </method>
@@ -304,10 +313,11 @@
         	var mainContainer = new MainContainer({});
         	var currentScreen = new ShowTimeScreen();
 			var alarmTime = "00:00";
-
+			var checkBoxLabel = "off"; 
             application.add(mainContainer); 
             mainContainer.add(currentScreen);
             var isRinging = false; 
+            var alarmOn = false; 
             
             function getTimeOfAlarm(){
             	return alarmTime;
