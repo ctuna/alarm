@@ -16,7 +16,7 @@
 <skin id = "numberButtonSkin" color = "#111A1A" />
 <skin id = "numberPressedSkin" color = "#8E9595" />
 
-<texture id="clockTexture" small="./assets/alarm-icon.png"/>
+<texture id="clockTexture" small="assets/alarm-icon.png"/>
 	<skin id=" clockSkin" texture="clockTexture" x="0" y="0" width="200" height="200">
 		<variants offset="200"/>
 	</skin>
@@ -289,7 +289,7 @@
     	<behavior>
     		<method id="onCreate" params="content">
                 <![CDATA[
-                        this.sound = new Sound( mergeURI( application.url, "assets/iphone.wav" ) );
+                        this.sound = new Sound( mergeURI( application.url, "assets/iphone.mp3" ) );
 						Sound.volume = 1.0;
 						this.sound.play();
                 ]]>
