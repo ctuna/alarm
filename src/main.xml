@@ -1,66 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <program xmlns="http://www.kinoma.com/kpr/1">
 
-	<require id="THEME" path="themes/flat/theme"/>
-	<require id="BUTTONS" path="controls/buttons"/>
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-<!-- ASSETS -->
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <require id="THEME" path="themes/flat/theme" />
+    <require id="BUTTONS" path="controls/buttons" />
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ASSETS -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-<skin id="charcoalSkin" color="#344040"/>
-<skin id = "buttonSkin" color = "#142952" />
-<skin id = "cancelButtonSkin" color = "#990000" />
-<skin id = "cancelButtonPressedSkin" color = "#FF3333" />
-<skin id = "saveButtonSkin" color = "#005C1F" />
-<skin id = "saveButtonPressedSkin" color = "#33AD5C" />
-<skin id = "numberButtonSkin" color = "#111A1A" />
-<skin id = "numberPressedSkin" color = "#8E9595" />
+    <skin id="charcoalSkin" color="#344040" />
+    <skin id="buttonSkin" color="#142952" />
+    <skin id="cancelButtonSkin" color="#990000" />
+    <skin id="cancelButtonPressedSkin" color="#FF3333" />
+    <skin id="saveButtonSkin" color="#005C1F" />
+    <skin id="saveButtonPressedSkin" color="#33AD5C" />
+    <skin id="numberButtonSkin" color="#111A1A" />
+    <skin id="numberPressedSkin" color="#8E9595" />
 
-<texture id="clockTexture" small="assets/alarm-icon.png"/>
-	<skin id=" clockSkin" texture="clockTexture" x="0" y="0" width="200" height="200">
-		<variants offset="200"/>
-	</skin>
+    <texture id="clockTexture" small="assets/alarm-icon.png" />
+    <skin id=" clockSkin" texture="clockTexture" x="0" y="0" width="200"
+        height="200">
+        <variants offset="200" />
+    </skin>
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-<!-- STYLES -->
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- STYLES -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
-<style id="timeStyle" font="bold 80px Helvetica, sans-serif" color="white" align="center, middle"/>
-<style id="alarmTimeStyle" font="bold 30px Helvetica, sans-serif" color="white" align="center, middle"/>
-<style id="buttonStyle" font="bold 40px Helvetica, sans-serif" color="white" align="center, middle"/>
-<style id="numberStyle" font="bold 20px Helvetica, sans-serif" color="white" align="center, middle"/>
-<style id="alarmSetForStyle" font="bold 20px Helvetica, sans-serif" color="white" align = "center, middle"/>
-<style id="clrStyle" font="bold 15px Helvetica, sans-serif" color="white" align = "center, middle"/>
-<style id="cornerTimeStyle" font="bold 20px Helvetica, sans-serif" color="white" align = "right, top"/>
-
-
-<style id="labelStyle" font="bold 40px Helvetica, sans-serif" color="white" align="left, middle"/>
-
-
-<style id="checkboxStyle" font="bold 30px" align="left">
-		<states colors="white,gray,green"/>
-</style>
-
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-<!-- HANDLERS -->
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <style id="timeStyle" font="bold 80px Helvetica, sans-serif"
+        color="white" align="center, middle" />
+    <style id="alarmTimeStyle" font="bold 30px Helvetica, sans-serif"
+        color="white" align="center, middle" />
+    <style id="buttonStyle" font="bold 40px Helvetica, sans-serif"
+        color="white" align="center, middle" />
+    <style id="numberStyle" font="bold 20px Helvetica, sans-serif"
+        color="white" align="center, middle" />
+    <style id="alarmSetForStyle" font="bold 20px Helvetica, sans-serif"
+        color="white" align="center, middle" />
+    <style id="clrStyle" font="bold 15px Helvetica, sans-serif"
+        color="white" align="center, middle" />
+    <style id="cornerTimeStyle" font="bold 20px Helvetica, sans-serif"
+        color="white" align="right, top" />
 
 
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-<!-- LAYOUTS -->
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-	<container id="MainContainer" left="0" right="0" top="0" bottom="0" skin="charcoalSkin" active="true">
+    <style id="labelStyle" font="bold 40px Helvetica, sans-serif"
+        color="white" align="left, middle" />
 
-	</container>
-	
-	<container id = "ShowTimeScreen" left="10" right="10" top="10" bottom="10" >
-			<column top="0" bottom="0" left = "0" right = "0">
-			
-			
-			
-		<label left="0" right="0" top="40"  style="timeStyle">
-			<behavior>
-				<method id="onCreate" params="content">
+
+    <style id="checkboxStyle" font="bold 30px" align="left">
+        <states colors="white,gray,green" />
+    </style>
+
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- HANDLERS -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- LAYOUTS -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <container id="MainContainer" left="0" right="0" top="0"
+        bottom="0" skin="charcoalSkin" active="true">
+
+    </container>
+
+    <container id="ShowTimeScreen" left="10" right="10" top="10"
+        bottom="10">
+        <column top="0" bottom="0" left="0" right="0">
+
+
+
+            <label left="0" right="0" top="40" style="timeStyle">
+                <behavior>
+                    <method id="onCreate" params="content">
                             <![CDATA[
 					content.interval = 1000;
 					var currentTime = getCurrentTime();
@@ -68,8 +79,8 @@
 			
 					content.start();
                             ]]>
-				</method>
-				<method id="onTimeChanged" params="content"><![CDATA[
+                    </method>
+                    <method id="onTimeChanged" params="content"><![CDATA[
 					var currentTime = getCurrentTime();
 					content.string = currentTime;
 					if (currentTime == getTimeOfAlarm()&& alarmOn){
@@ -79,32 +90,35 @@
 						 
 					}	
 					
-				]]></method>		
-			</behavior>
-      	</label>		      		
+				]]></method>
+                </behavior>
+            </label>
 
-		</column>		
-		<container left="0" right="0" bottom="0"  skin="numberButtonSkin" active="true">
-			<label left="0" right="0" top="0"  style="buttonStyle" string = "'set alarm'"/>
-				<behavior>
-					<method id="onTouchBegan" params="content, id, x, y, ticks">
+        </column>
+        <container left="0" right="0" bottom="0"
+            skin="numberButtonSkin" active="true">
+            <label left="0" right="0" top="0" style="buttonStyle"
+                string="'set alarm'" />
+            <behavior>
+                <method id="onTouchBegan" params="content, id, x, y, ticks">
                             <![CDATA[
                                 content.skin= numberPressedSkin;
                             ]]>
-            		</method>
-					<method id="onTouchEnded" params="content, id, x, y, ticks">
+                </method>
+                <method id="onTouchEnded" params="content, id, x, y, ticks">
                         <![CDATA[
                             changeScreen(SETALARMSCREEN);
                             content.skin= numberButtonSkin;
                         ]]>
-                    </method>
-				</behavior>
-		</container>
-	</container>
-	
-	<container id="NumberContainer" width="40" height="40" skin="numberButtonSkin"  active="true">
-		<behavior>
-			<method id="onTouchBegan" params="content, id, x, y, ticks">
+                </method>
+            </behavior>
+        </container>
+    </container>
+
+    <container id="NumberContainer" width="40" height="40"
+        skin="numberButtonSkin" active="true">
+        <behavior>
+            <method id="onTouchBegan" params="content, id, x, y, ticks">
                             <![CDATA[
                                 content.skin= numberPressedSkin;
                             ]]>
@@ -115,186 +129,194 @@
                                press(content.first.string);
                             ]]>
             </method>
-	</behavior>
-            
-	</container>
-	<container id = "SetAlarmScreen" left="10" right="10" top="10" bottom="10">
+        </behavior>
+
+    </container>
+    <container id="SetAlarmScreen" left="10" right="10" top="10"
+        bottom="10">
 
 
-		<line top = "0" bottom = "0" left = "0" right = "0">
-		<column top = "0" left = "0" bottom = "0">
-			<label left="0" right="0" top="0" height = "30"  style="alarmTimeStyle">
-				<behavior>
-					<method id="onCreate" params="content">
+        <line top="0" bottom="0" left="0" right="0">
+            <column top="0" left="0" bottom="0">
+                <label left="0" right="0" top="0" height="30"
+                    style="alarmTimeStyle">
+                    <behavior>
+                        <method id="onCreate" params="content">
                     <![CDATA[
                         content.string = alarmTime;
                     ]]>
-                	</method>
-				</behavior>
-			</label>
-			<line top="15" left="0" bottom="0" right="0">
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="1" style = "numberStyle"/>
-                </container>
-                <content width ="6"/>
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="2" style = "numberStyle"/>
-                </container>
-                <content width ="6"/>
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="3" style = "numberStyle"/>
-                </container>
-            </line>
-            <content height = "6"/>
-            			<line top="0" left="0" bottom="0" right="0">
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="4" style = "numberStyle"/>
-                </container>
-                <content width ="6"/>
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="5" style = "numberStyle"/>
-                </container>
-                <content width ="6"/>
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="6" style = "numberStyle"/>
-                </container>
-            </line>
-            <content height = "6"/>
-            			<line top="0" left="0" bottom="0" right="0">
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="7" style = "numberStyle"/>
-                </container>
-                <content width ="6"/>
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="8" style = "numberStyle"/>
-                </container>
-                <content width ="6"/>
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="9" style = "numberStyle"/>
-                </container>
-            </line>
-            <content height = "6"/>
-            	<line top="0" left="0" bottom="0" right="0">
-				<container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="'clr'" style = "clrStyle"/>
-                </container>
-                <content width = "6"/>
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="'0'" style ="numberStyle"/>
-                </container>
-                <content width = "6"/>
-                <container like="NumberContainer">
-                	<label top="10" left="10" bottom="10" right="10"
-                        string="'-'" style = "numberStyle"/>
-                </container>
-      	</line>
-        </column>
-        
-        <column top = "0" right = "0" bottom = "0" left = "20">
-        
-       
-	<line left = "0" right = "0" top = "0">
-		<container  left="0" top="0" width="30" height="30" like="BUTTONS.Checkbox">    	
-			<behavior like="BUTTONS.CheckboxBehavior">
-				<method id="onSelected"><![CDATA[
+                        </method>
+                    </behavior>
+                </label>
+                <line top="15" left="0" bottom="0" right="0">
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="1" style="numberStyle" />
+                    </container>
+                    <content width="6" />
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="2" style="numberStyle" />
+                    </container>
+                    <content width="6" />
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="3" style="numberStyle" />
+                    </container>
+                </line>
+                <content height="6" />
+                <line top="0" left="0" bottom="0" right="0">
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="4" style="numberStyle" />
+                    </container>
+                    <content width="6" />
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="5" style="numberStyle" />
+                    </container>
+                    <content width="6" />
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="6" style="numberStyle" />
+                    </container>
+                </line>
+                <content height="6" />
+                <line top="0" left="0" bottom="0" right="0">
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="7" style="numberStyle" />
+                    </container>
+                    <content width="6" />
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="8" style="numberStyle" />
+                    </container>
+                    <content width="6" />
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="9" style="numberStyle" />
+                    </container>
+                </line>
+                <content height="6" />
+                <line top="0" left="0" bottom="0" right="0">
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="'clr'" style="clrStyle" />
+                    </container>
+                    <content width="6" />
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="'0'" style="numberStyle" />
+                    </container>
+                    <content width="6" />
+                    <container like="NumberContainer">
+                        <label top="10" left="10" bottom="10"
+                            right="10" string="'-'" style="numberStyle" />
+                    </container>
+                </line>
+            </column>
+
+            <column top="0" right="0" bottom="0" left="20">
+
+
+                <line left="0" right="0" top="0">
+                    <container left="0" top="0" width="30"
+                        height="30" like="BUTTONS.Checkbox">
+                        <behavior like="BUTTONS.CheckboxBehavior">
+                            <method id="onSelected"><![CDATA[
 					checkBoxLabel.string = "on";        
 					alarmOn = true;       
 				]]></method>
-				<method id="onUnselected"><![CDATA[
+                            <method id="onUnselected"><![CDATA[
 					checkBoxLabel.string = "off";         
 					alarmOn = false;        
 				]]></method>
-			</behavior>
-		</container>   
-		<label top="0" left="0" bottom="0" right="0"
-            string="'off'" style = "labelStyle">
-            <behavior>
-            	<method id="onCreate" params="content">
+                        </behavior>
+                    </container>
+                    <label top="0" left="0" bottom="0" right="0"
+                        string="'off'" style="labelStyle">
+                        <behavior>
+                            <method id="onCreate" params="content">
                     <![CDATA[
                         checkBoxLabel = content; 
                     ]]>
-                </method>
-            </behavior>
-        </label>
-     </line>
-			
-		
-		<content height = "6"/>
-		<container left="0" right="0" bottom="30"  skin="saveButtonSkin" active="true">
-			<label left="0" right="0" top="0"  style="buttonStyle" string = "'save'"/>
-				<behavior>
-					<method id="onTouchBegan" params="content, id, x, y, ticks">
+                            </method>
+                        </behavior>
+                    </label>
+                </line>
+
+
+                <content height="6" />
+                <container left="0" right="0" bottom="30"
+                    skin="saveButtonSkin" active="true">
+                    <label left="0" right="0" top="0" style="buttonStyle"
+                        string="'save'" />
+                    <behavior>
+                        <method id="onTouchBegan" params="content, id, x, y, ticks">
                             <![CDATA[
                                 content.skin= saveButtonPressedSkin;
                             ]]>
-           		 	</method>
-           		 	<method id="onTouchEnded" params="content, id, x, y, ticks">
+                        </method>
+                        <method id="onTouchEnded" params="content, id, x, y, ticks">
                             <![CDATA[
                                content.skin= saveButtonSkin;
                                changeScreen(SHOWTIMESCREEN);
                             ]]>
-            		</method>
-				</behavior>
-		</container>
-		
-		</column> 
-		</line> 
-	</container> 
-    
-    
-    <container id = "DetonateAlarmScreen" left="10" right="10" top="10" bottom="10" active = "true" skin = "charcoalSkin" >
-    	<column left="0" right="0" top="0" bottom="0">
-    	<label left="0" right="0" top="0" bottom="0" style = "cornerTimeStyle">
-    		<behavior>
-    			<method id="onCreate" params="content">
+                        </method>
+                    </behavior>
+                </container>
+
+            </column>
+        </line>
+    </container>
+
+
+    <container id="DetonateAlarmScreen" left="10" right="10"
+        top="10" bottom="10" active="true" skin="charcoalSkin">
+        <column left="0" right="0" top="0" bottom="0">
+            <label left="0" right="0" top="0" bottom="0"
+                style="cornerTimeStyle">
+                <behavior>
+                    <method id="onCreate" params="content">
                     <![CDATA[
                         content.interval = 1000;
                         content.string = getCurrentTime();
                         content.start();
 
                     ]]>
-                </method>
-                <method id="onTimeChanged" params="content">
+                    </method>
+                    <method id="onTimeChanged" params="content">
                     <![CDATA[
                         content.string = getCurrentTime();
                     ]]>
-                </method>
-        	</behavior> 
-        </label>
-    	<content height = "6"/>
-    	<container left="0" top = "0" bottom = "0"  right="0" skin="clockSkin" variant="0">
-					<behavior>
-						<method id="onDisplaying" params="container"><![CDATA[
+                    </method>
+                </behavior>
+            </label>
+            <content height="6" />
+            <container left="0" top="0" bottom="0" right="0"
+                skin="clockSkin" variant="0">
+                <behavior>
+                    <method id="onDisplaying" params="container"><![CDATA[
 							container.interval = 100;
 							container.start();
-						]]></method>	
-						<method id="onTimeChanged" params="container"><![CDATA[
+						]]></method>
+                    <method id="onTimeChanged" params="container"><![CDATA[
 							container.variant = (container.variant + 1) % 4;
-						]]></method>	
-					</behavior>
-					
-				</container>
-    	</column> 
-    	<behavior>
-    		<method id="onCreate" params="content">
+						]]></method>
+                </behavior>
+
+            </container>
+        </column>
+        <behavior>
+            <method id="onCreate" params="content">
                 <![CDATA[
                         this.sound = new Sound( mergeURI( application.url, "assets/iphone.mp3" ) );
 						Sound.volume = 1.0;
 						this.sound.play();
                 ]]>
             </method>
-    		<method id="onTouchBegan" params="content, id, x, y, ticks">
+            <method id="onTouchBegan" params="content, id, x, y, ticks">
                 <![CDATA[
                     content.skin = numberPressedSkin;
                 ]]>
@@ -310,9 +332,9 @@
             </method>
         </behavior>
     </container>
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
-<!-- SCRIPTS -->
-<!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- SCRIPTS -->
+    <!-- ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
 
     <script>
         <![CDATA[
