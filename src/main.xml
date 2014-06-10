@@ -262,6 +262,7 @@
                         content.interval = 1000;
                         content.string = getCurrentTime();
                         content.start();
+
                     ]]>
                 </method>
                 <method id="onTimeChanged" params="content">
@@ -286,6 +287,13 @@
 				</container>
     	</column> 
     	<behavior>
+    		<method id="onCreate" params="content">
+                <![CDATA[
+                        this.sound = new Sound( mergeURI( application.url, "assets/iphone.wav" ) );
+						Sound.volume = 1.0;
+						this.sound.play();
+                ]]>
+            </method>
     		<method id="onTouchBegan" params="content, id, x, y, ticks">
                 <![CDATA[
                     content.skin = numberPressedSkin;
@@ -293,6 +301,7 @@
             </method>
             <method id="onTouchEnded" params="content, id, x, y, ticks">
                 <![CDATA[
+                	Sound.volume = 0;
                 	isRinging = false; 
                 	alarmOn = false; 
                 	content.skin = charcoalSkin;
